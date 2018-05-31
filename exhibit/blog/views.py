@@ -10,12 +10,9 @@ from blog.forms import PostForm, CommentForm
 
 
 # Create your views here.
-class AboutView(TemplateView):
-    template_name = 'about.html'
-
-
 class PostListView(ListView):
     model = Post
+    paginate_by = 2
 
     def get_queryset(self):
         # field lookup: __lte -> less than or equal to

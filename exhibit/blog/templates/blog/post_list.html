@@ -1,0 +1,67 @@
+{%extends "base.html"%}
+{%block content%}
+<div class="row">
+  <div class="col-md-8 blog-main">
+    <h3 class="pb-3 mb-4 font-italic border-bottom">
+      My Blog
+    </h3>
+    {%for post in post_list%}
+      <div class="blog-post">
+        <h2 class="blog-post-title">
+          <a href="{%url 'blog:post_detail' pk=post.pk%}">{{post.title}}</a>
+        </h2>
+        <p class="blog-post-meta">{{post.publish_date}}</p>
+        <p>{{post.text|safe|truncatewords:20}}</p>
+      </div>
+    {%endfor%}
+
+    <nav class="blog-pagination">
+      <span class="step-links">
+          {% if page_obj.has_previous %}
+              <a href="?page=1"
+                class="btn btn-outline-primary">&laquo; first</a>
+              <a href="?page={{ page_obj.previous_page_number }}"
+                class="btn btn-outline-primary">previous</a>
+          {% endif %}
+
+          <span class="current">
+              Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+          </span>
+
+          {% if page_obj.has_next %}
+              <a href="?page={{ page_obj.next_page_number }}"
+                class="btn btn-outline-primary">next</a>
+              <a href="?page={{ page_obj.paginator.num_pages }}"
+                class="btn btn-outline-primary">last &raquo;</a>
+          {% endif %}
+      </span>
+    </nav>
+  </div>
+
+  <aside class="col-md-4 blog-sidebar">
+    <!-- <div class="p-3 mb-3 bg-light rounded">
+      <h4 class="font-italic">About</h4>
+      <p class="mb-0">Etiam porta <em>sem malesuada .</p>
+    </div> -->
+
+    <div class="p-3">
+      <h4 class="font-italic">Archives</h4>
+      <ol class="list-unstyled mb-0">
+        <li><a href="#">March 2014</a></li>
+        <li><a href="#">February 2014</a></li>
+        <li><a href="#">January 2014</a></li>
+      </ol>
+    </div>
+
+    <div class="p-3">
+      <h4 class="font-italic">Elsewhere</h4>
+      <ol class="list-unstyled">
+        <li><a href="https://github.com/ddonco">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/dillondonohue/">LinkedIn</a></li>
+        <li><a href="https://www.kaggle.com/ddonco">Kaggle</a></li>
+      </ol>
+    </div>
+  </aside><!-- /.blog-sidebar -->
+
+</div><!-- /.row -->
+{%endblock%}

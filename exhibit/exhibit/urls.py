@@ -22,6 +22,8 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.HomePage.as_view(), name='index'),
+    path('about/', views.AboutView.as_view(), name='about'),
+    path('blog/', include('blog.urls', namespace='blog'))
 ]
 
 if settings.DEBUG:
