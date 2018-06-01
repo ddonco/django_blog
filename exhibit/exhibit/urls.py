@@ -15,7 +15,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.contrib.auth import views
 from django.conf import settings
 from . import views
 
@@ -25,6 +24,7 @@ urlpatterns = [
     path('about/', views.AboutView.as_view(), name='about'),
     path('blog/', include('blog.urls', namespace='blog')),
     path('project/', include('project.urls', namespace='project')),
+    path('accounts/', include('accounts.urls', namespace='accounts')),
 ]
 
 if settings.DEBUG:
