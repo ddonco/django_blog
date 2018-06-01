@@ -1,0 +1,16 @@
+{%extends "base.html"%}
+{%load staticfiles%}
+{%block content%}
+<div class="container mt-3">
+  <div class="row">
+    <div id="ghapiprofile" class="col-md-6"></div>
+    <div id="ghapidata" class="col-md-6"></div>
+  </div>
+</div>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script type="text/javascript" src="{%static 'project/js/github-data.js'%}"></script>
+
+{%endblock%}
