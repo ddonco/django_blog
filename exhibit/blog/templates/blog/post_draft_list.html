@@ -1,0 +1,10 @@
+{%extends "base.html"%}
+{%block content%}
+{%for post in post_list%}
+  <div class="blog-post">
+    <h3 class="blog-post-title"><a href="{%url 'blog:post_detail' pk=post.pk%}">{{post.title}}</a></h3>
+    <p class="date blog-post-meta">Created: {{post.create_date}}</p>
+    <p>{{post.text|safe|truncatechars:200}}</p>
+  </div>
+{%endfor%}
+{%endblock%}

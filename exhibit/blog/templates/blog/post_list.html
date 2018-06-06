@@ -1,19 +1,32 @@
-{%extends "base.html"%}
-{%block content%}
+{% extends "base.html" %}
+{% load custom %}
+{% block content %}
 <div class="row">
   <div class="col-md-8 blog-main">
     <h3 class="pb-3 mb-4 font-italic border-bottom">
       My Blog
     </h3>
-    {%for post in post_list%}
-      <div class="blog-post">
-        <h2 class="blog-post-title">
-          <a href="{%url 'blog:post_detail' pk=post.pk%}">{{post.title}}</a>
-        </h2>
-        <p class="blog-post-meta">{{post.publish_date}}</p>
-        <p>{{post.text|safe|truncatewords:20}}</p>
+    {% for post in post_list %}
+      <div class="card p-3">
+        <div class="row">
+          <div class="col-md-8">
+            <h2 class="card-title">
+              <a href="{% url 'blog:post_detail' pk=post.pk %}">{{ post.title }}</a>
+            </h2>
+            <p class="card-subtitle text-muted">{{ post.publish_date }}</p>
+            <p class="card-text">{{ post.text|render_markdown|safe|truncatewords:20 }}</p>
+          </div>
+          <div class="col-md-4">
+            {% if post.thumbnail %}
+              <a href="{% url 'blog:post_detail' pk=post.pk %}">
+                <img class="img-thumbnail flex-auto d-none d-lg-block"
+                  src="{{ post.thumbnail.url }}" alt="Post thumbnail">
+              </a>
+            {% endif %}
+          </div>
+        </div>
       </div>
-    {%endfor%}
+    {% endfor %}
 
     <nav class="blog-pagination">
       <span class="step-links">
@@ -64,4 +77,4 @@
   </aside><!-- /.blog-sidebar -->
 
 </div><!-- /.row -->
-{%endblock%}
+{% endblock %}

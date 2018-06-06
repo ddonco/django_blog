@@ -1,12 +1,23 @@
-{%extends "base.html"%}
-{%block content%}
+{% extends "base.html" %}
+{% load custom %}
+{% block content %}
 <div class="row">
-  <div class="col-md-8 blog-main">
-    <div class="blog-post">
-      <h2 class="blog-post-title">{{post.title}}</h2>
-      <p class="blog-post-meta">{{post.publish_date}}</p>
-      <p>{{post.text|safe|linebreaksbr}}</p>
-    </div>
+  <div class="col-md-8 blog-post">
+    <h3 class="blog-post-title">{{ post.title }}</h3>
+    <p class="post-content">
+      {{ post.text|render_markdown|safe|linebreaksbr }}
+    </p>
+    {% if user.is_authenticated %}
+      {% if post.publish_date %}
+        <div class="date blog-post-meta">
+          {{ post.publish_date }}
+        </div>
+      {% else %}
+        <a class="btn btn-outline-primary" href="{% url 'blog:post_publish' pk=post.pk %}">Publish</a>
+      {% endif %}
+      <a class="btn btn-outline-secondary" href="{% url 'blog:post_edit' pk=post.pk %}">Edit</a>
+      <a class="btn btn-outline-danger" href="{% url 'blog:post_remove' pk=post.pk %}">Delete</a>
+    {% endif %}
   </div>
 </div>
-{%endblock%}
+{% endblock %}

@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from blog import views
 
 # app_name not needed in project with only one application
