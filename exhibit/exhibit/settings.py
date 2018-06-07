@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import json
 from datetime import datetime
+from cloudinary import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -138,8 +140,21 @@ MARKDOWNX_MEDIA_PATH = datetime.now().strftime('markdownx/%Y/%m/%d')
 MARKDOWNX_SERVER_CALL_LATENCY = 1000
 MARKDOWNX_EDITOR_RESIZABLE = True
 MARKDOWNX_MARKDOWNIFY_FUNCTION = 'markdownx.utils.markdownify'
+MARKDOWNX_CLOUD_UPLOAD = 'cloudinary'
+MARKDOWNX_CLOUD_FOLDER = 'blog'
+MARKDOWNX_CLOUD_TAGS = ['blog']
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 INTERNAL_IPS = ['127.0.0.1']
+
+# Cloudinary configuration
+with open('../../cloudinary_credentials.json') as file:
+    creds = json.load(file)
+
+config(
+    cloud_name = creds['cloud_name'],
+    api_key = creds['api_key'],
+    api_secret = creds['api_secret']
+)

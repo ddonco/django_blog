@@ -7,8 +7,9 @@
   <div class="col-md-6 my-3">
     <div class="clearfix">
       <h3 class="float-left">New Post</h3>
-      <button class="btn btn-success float-right" type="button">
-        Manage Photos
+      <button class="btn btn-default float-right" id="manage-photos"
+        data-toggle="modal" data-target="#photoModal" type="button">
+        View Uploaded Photos
       </button>
     </div>
     <form class="post-form" method="POST" enctype="multipart/form-data">
@@ -23,19 +24,18 @@
 
 <!-- Modal -->
 <div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" >Modal title</h5>
+        <h5 class="modal-title" >Uploaded Photos</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body text-center px-3" id="modal-body-content">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
@@ -45,8 +45,14 @@
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous">
 </script>
-<script src="//widget.cloudinary.com/global/all.js" type="text/javascript">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-jquery-file-upload/2.5.0/cloudinary-jquery-file-upload.min.js"
+  type="text/javascript">
 </script>
+<script src="{% static 'blog/blueimp-file-upload/js/vendor/jquery.ui.widget.js' %}" type="text/javascript"></script>
+<script src="{% static 'blog/blueimp-file-upload/js/jquery.iframe-transport.js' %}" type="text/javascript"></script>
+<script src="{% static 'blog/blueimp-file-upload/js/jquery.fileupload.js' %}" type="text/javascript"></script>
+<script src="{% static 'blog/cloudinary-jquery-file-upload/cloudinary-jquery-file-upload.js' %}" type="text/javascript"></script>
+
 <script type="text/javascript" src="{% static '/blog/js/cloudinary-widget.js' %}">
 </script>
 {% endblock %}

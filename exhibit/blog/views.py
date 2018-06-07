@@ -2,12 +2,15 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.utils import timezone
+from django.http import JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (TemplateView, ListView, DetailView,
                                   CreateView, UpdateView, DeleteView)
 
 from blog.models import Post, Comment
 from blog.forms import PostForm, CommentForm
+
+from cloudinary.api import resources_by_tag
 
 
 # Create your views here.
@@ -92,3 +95,10 @@ def comment_remove(request, pk):
     post_pk = comment.post.pk
     comment.delete()
     return redirect('blog:post_detail', pk=post_pk)
+
+
+############################# AJAX Requests ###################################
+
+def get_cloud_images(request):
+    image_data = resources_by_tag("blog")
+    return JsonResponse(image_data)

@@ -19,5 +19,13 @@
       <a class="btn btn-outline-danger" href="{% url 'blog:post_remove' pk=post.pk %}">Delete</a>
     {% endif %}
   </div>
+  <div class="col-md-4">
+    {% if post.thumbnail %}
+      <a href="{% url 'blog:post_detail' pk=post.pk %}">
+        <img class="img-thumbnail flex-auto d-none d-lg-block"
+          src="{{ post.thumbnail.url }}" alt="Post thumbnail">
+      </a>
+    {% endif %}
+  </div>
 </div>
 {% endblock %}
