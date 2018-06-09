@@ -10,14 +10,16 @@ $("#manage-photos").click(function() {
   $.ajax({
     url: "cloud_images/",
     success: function(data) {
+      var htmlContent = ``
       $.each(data["resources"], function(key, value) {
-        $("#modal-body-content").html(
+        htmlContent += (
           `<img src="` + value["secure_url"] + `"
             class="figure-img img-fluid rounded text-center mt-3" alt="">
           <p class="figure-caption text-left mb-3">
             <small>![](` + value["secure_url"] + `)</small>
           </p>`
         );
+        $("#modal-body-content").html(htmlContent);
       })
     },
     failure: function(data) {

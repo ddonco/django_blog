@@ -4,11 +4,11 @@
 <div class="jumbotron pl-5 pr-1 py-1 text-white rounded bg-dark">
   <div class="row">
     <div class="col-md-8 px-0 pt-3">
+      {% if latest_posts.0 %}
       <h1 class="display-4 font-italic">
         <a href="{% url 'blog:post_detail' pk=latest_posts.0.pk %}">
           {{ latest_posts.0.title }}</a></h1>
       <div class="mb-1 text-muted">{{ latest_posts.0.publish_date }}</div>
-      {% if latest_posts.0 %}
         <p class="lead my-3">
           {{ latest_posts.0.text|render_markdown|safe|truncatewords:20 }}
         </p>
