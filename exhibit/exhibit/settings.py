@@ -84,12 +84,15 @@ WSGI_APPLICATION = 'exhibit.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
+with open('../../postgresql_credentials.json') as db_file:
+    postgresql_creds = json.load(db_file)
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'exhibit_psql',
-        'USER': 'exhibit_web',
-        'PASSWORD': 'LucyPeanutDB@1991',
+        'NAME': postgresql_creds['name'],
+        'USER': postgresql_creds['user'],
+        'PASSWORD': postgresql_creds['password'],
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -155,10 +158,10 @@ INTERNAL_IPS = ['127.0.0.1']
 
 # Cloudinary configuration
 with open('../../cloudinary_credentials.json') as file:
-    creds = json.load(file)
+    cloudinary_creds = json.load(file)
 
 config(
-    cloud_name = creds['cloud_name'],
-    api_key = creds['api_key'],
-    api_secret = creds['api_secret']
+    cloud_name = cloudinary_creds['cloud_name'],
+    api_key = cloudinary_creds['api_key'],
+    api_secret = cloudinary_creds['api_secret']
 )
